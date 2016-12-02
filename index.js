@@ -1,7 +1,9 @@
-require('dotenv').config();
 const Botkit = require('botkit');
 var JiraClient = require('jira-connector');
 const production = process.env.PRODUCTION == 'true'
+
+if (!production)
+  require('dotenv').config();
 
 var jira = new JiraClient( {
     host: process.env.JIRA_HOST,
