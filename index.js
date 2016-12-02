@@ -47,7 +47,7 @@ function createMessage(issueNumber) {
 
       if (issue) {
         resolve({
-          color: issueNumber.match(process.env.SLACK_COLOR_REGEX) > -1 ? process.env.SLACK_COLOR_ONE : process.env.SLACK_COLOR_TWO,
+          color: issueNumber.match(process.env.SLACK_COLOR_REGEX) ? process.env.SLACK_COLOR_ONE : process.env.SLACK_COLOR_TWO,
           title: issueNumber + ' - ' + issue.fields.summary,
           title_link: process.env.JIRA_ISSUE_URL + issueNumber,
           text: issue.fields.description,
