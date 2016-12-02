@@ -1,0 +1,27 @@
+{
+  "name": "reachbot",
+  "version": "1.0.0",
+  "description": "Slack bot for Reacher",
+  "main": "src/index.js",
+  "engines": {
+    "node": "7.2.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "slack",
+    "bot",
+    "reacher"
+  ],
+  "author": "Johan van Eck",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "^0.4.2",
+    "dotenv": "^2.0.0",
+    "jira-connector": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
