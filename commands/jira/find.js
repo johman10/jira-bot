@@ -1,6 +1,7 @@
 const config = require('../../config');
 const envVariables = config['env-variables'];
 const jira = config.jira;
+const i18n = config.locales;
 
 function findIssue(bot, message) {
   var messagePromises = [];

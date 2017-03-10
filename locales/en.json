@@ -1,5 +1,19 @@
 {
   "jira": {
+    "assign": {
+      "error": {
+        "api": "The JIRA API returned an error when creating. Make sure your registration is correct, say \"whoami\" in a private conversation with me to find your username and set it by saying \"register\" in a private conversation with me"
+      },
+      "success": "I successfully assigned you to issue {{issueKey}}. Please doublecheck JIRA just to be sure. Robots make mistakes you know."
+    },
+    "register": {
+      "question": "To register your JIRA account you will have tell me your name in JIRA. Please make sure your name is between double quotes (for example: \"Slackbot\") so I can find your name in the message. If you don't know your username have a look here: https://mittmedia.atlassian.net/secure/ViewProfile.jspa.",
+      "stop": "The registration process has been stopped.",
+      "success": "Your registration was successfull with username {{username}}. If you want to change your registration just say 'registration' again. From now on you will be able to assign yourself to JIRA issues by saying something like: '@reachbot assign REF-XXX'",
+      "error": {
+        "save": "Something went wrong while saving, I'm sorry. :disappointed: Please try again, if it still doesn't work contact my creator Johan van Eck."
+      }
+    },
     "link": {
       "success": "The link between {{issue1}} & {{issue2}} was successfully created. Please double check JIRA to make sure that it was done correctly.",
       "error": {
@@ -9,8 +23,25 @@
     },
     "find": {
       "error": {
-        "not_found": "I thought I heard you talking about an issues just a second ago, but I was unable to find it on JIRA. I'm sorry. :("
+        "not_found": "I thought I heard you talking about an issues just a second ago, but I was unable to find it on JIRA. I'm sorry. :disappointed:"
       }
+    },
+    "registration": {
+      "title": "Your user data",
+      "text": "This is the data that I have from <@{{userId}}>",
+      "field": {
+        "jira_username": "Jira username"
+      },
+      "footer": "I'm no Google yet."
     }
+  },
+  "storage": {
+    "error": {
+      "user_get": "There was a problem when getting you from the database. Please make sure that you registered yourself username with me.",
+      "user_none": "I was unable to find you in my brain. Please say \"register\" in a private conversation and let me know you JIRA username."
+    }
+  },
+  "meta": {
+    "love": "Aahh... I love you too! :heart: But just know that I will never love you like I love my creator: Johan van Eck."
   }
 }
