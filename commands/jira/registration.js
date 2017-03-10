@@ -4,11 +4,11 @@ const i18n = config.locales;
 function findRegistration (bot, message) {
   bot.botkit.storage.users.get(message.user, function (err, user) {
     if (err) {
-      return bot.reply(i18n.t('storage.error.user_get'))
+      return bot.reply(message, i18n.t('storage.error.user_get'))
     }
 
     if (!user) {
-      return bot.reply(i18n.t('storage.error.user_none'))
+      return bot.reply(message, i18n.t('storage.error.user_none'))
     }
 
     bot.reply(message, { attachments: [buildRegistrationMessage(user)] });
