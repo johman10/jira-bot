@@ -10,7 +10,7 @@ function registerUser (bot, message) {
         callback: function(response,convo) {
           bot.botkit.storage.users.save({ id: response.user, jira_username: response.match[1] }, function(err) {
             if (err) {
-              convo.say(i18n.t('storage'));
+              convo.say(i18n.t('storage.error.save'));
               convo.repeat();
               convo.next();
             }
