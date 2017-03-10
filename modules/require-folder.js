@@ -5,7 +5,7 @@ function requireFolder(directory) {
   var modules = {};
   var directoryContent = fs.readdirSync(directory);
   directoryContent.forEach((object) => {
-    if (object == 'index.js') { return; };
+    if (object == 'index.js' || object == '.DS_Store') { return; };
     var objectPath = path.join(directory, object)
     var objectStats = fs.lstatSync(objectPath);
     if (objectStats.isDirectory()) {

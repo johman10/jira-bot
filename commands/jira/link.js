@@ -3,7 +3,6 @@ const envVariables = config['env-variables'];
 const i18n = config.locales;
 const jira = config.jira;
 
-// TODO: make the different link types dynamically by loading them on server start through the jira.issueLinkType functions
 const linkMap = [
   {
     name: 'Blocks',
@@ -36,7 +35,7 @@ function findIssues(bot, message) {
   if (issueNumbers && issueNumbers.length == 2) {
     return issueNumbers;
   } else {
-    bot.reply(message, i18n.t('jira.link.error.message'))
+    bot.replyInThread(message, i18n.t('jira.link.error.message'))
     return;
   }
 }
@@ -48,7 +47,7 @@ function findLinkName(bot, message) {
     var linkName = linkMap.find((link) => { return link.options.indexOf(linkType[0]) > -1 }).name;
     return linkName;
   } else {
-    bot.reply(message, i18n.t('jira.link.error.message'));
+    bot.replyInThread(message, i18n.t('jira.link.error.message'));
     return;
   }
 }
@@ -73,11 +72,11 @@ function createLink(bot, message, issues, linkName) {
   var linkBody = buildJiraBody(linkName, issues);
   jira.issueLink.createIssueLink(linkBody, function(error, response) {
     if (error) {
-      bot.reply(message, i18n.t('jira.link.error.api'));
+      bot.replyInThread(message, i18n.t('jira.link.error.api'));
       return;
     }
 
-    bot.reply(message, i18n.t('jira.link.success', { issue1: issues[0], issue2: issues[1] }))
+    bot.replyInThread(message, i18n.t('jira.link.success', { issue1: issues[0], issue2: issues[1] }))
   });
 }
 

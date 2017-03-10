@@ -6,6 +6,11 @@
         "api": "I tried to link two issues but I failed. :( There was an error when requesting the API, please try again later",
         "message": "I tried to link two issues but I failed. :( I couldn't find the link type in your message. Please follow the following pattern: *link REF-<number> is blocked by RE-<number>*. Link type can be one of the following: is blocked by, relates to, is duplicated by or is caused by."
       }
+    },
+    "find": {
+      "error": {
+        "not_found": "I thought I heard you talking about an issues just a second ago, but I was unable to find it on JIRA. I'm sorry. :("
+      }
     }
   }
 }

@@ -9,20 +9,22 @@ function findIssue(bot, message) {
   })
 
   Promise.all(messagePromises).then((attachments) => {
-    bot.reply(message, { attachments });
+    bot.replyInThread(message, { attachments });
   }).catch(() => {
-    bot.reply(
+    bot.replyInThread(
       message,
-      "I thought I heard you talking about an issues just a second ago, but I was unable to find it on JIRA. I'm sorry. :(");
+      i18n.t('jira.find.error.not_found')
+    );
   })
 }
 
 function createMessage(issueNumber) {
   return new Promise((resolve, reject) => {
     jira.issue.getIssue({ issueKey: issueNumber }, function(error, issue) {
+      console.log(error, issue);
       if (error || !issue) {
-        console.debug('ERROR: ', error)
-        reject();
+        console.error('ERROR: ', error)
+        return reject();
       }
 
       var attachments = [];
