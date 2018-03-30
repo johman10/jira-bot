@@ -22,15 +22,19 @@ function findIssue(bot, message) {
 function createMessage(issueNumber) {
   return new Promise((resolve, reject) => {
     jira.issue.getIssue({ issueKey: issueNumber }, function(error, issue) {
-      console.log(error, issue);
       if (error || !issue) {
         console.error('ERROR: ', error)
         return reject();
       }
 
+      let color = envVariables('SLACK_COLOR_ONE')
+      if (envVariables('SLACK_COLOR_REGEX') && issueNumber.match(envVariables('SLACK_COLOR_REGEX'))) {
+        color = envVariables('SLACK_COLOR_TWO')
+      }
+
       var attachments = [];
       resolve({
-        color: issueNumber.match(envVariables('SLACK_COLOR_REGEX')) ? envVariables('SLACK_COLOR_ONE') : envVariables('SLACK_COLOR_TWO'),
+        color,
         title: issueNumber + ' - ' + issue.fields.summary,
         title_link: envVariables('JIRA_ISSUE_URL') + issueNumber,
         text: issue.fields.description,
