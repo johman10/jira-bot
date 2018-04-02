@@ -1,41 +1,43 @@
-// TODO: Env variable validation. Throw an obvious error for missing vars when booting would be nice for debugging purposes
+// TODO: Env variable validation.
+// Throw an obvious error for missing vars when booting would be nice for debugging purposes
 const config = require('./config');
+
 const botController = config['bot-controller'];
-const jira = config.jira;
 const envVariables = config['env-variables'];
 const commands = require('./commands');
+
 const listenFor = [
   {
     regex: '^link',
     on: ['mention', 'direct_message'],
-    handler: commands.jira.link
+    handler: commands.jira.link,
   },
   {
-    regex: [new RegExp('assign me to ' + envVariables('JIRA_ISSUE_REGEX'), 'i')],
+    regex: [new RegExp(`assign me to ${envVariables('JIRA_ISSUE_REGEX')}`, 'i')],
     on: ['mention', 'direct_message'],
-    handler: commands.jira.assign
+    handler: commands.jira.assign,
   },
   {
     regex: [new RegExp(envVariables('JIRA_ISSUE_REGEX'), 'gi')],
     on: ['ambient', 'direct_message'],
-    handler: commands.jira.find
+    handler: commands.jira.find,
   },
   {
     regex: '^register',
     on: ['direct_message'],
-    handler: commands.jira.register
+    handler: commands.jira.register,
   },
   {
     regex: '^whoami',
     on: ['direct_message'],
-    handler: commands.jira.registration
+    handler: commands.jira.registration,
   },
   {
     regex: [new RegExp('[love|heart]', 'gi')],
     on: ['direct_message', 'mention'],
-    handler: commands.love
-  }
-]
+    handler: commands.love,
+  },
+];
 
 listenFor.forEach((listenItem) => {
   botController.hears(listenItem.regex, listenItem.on, listenItem.handler);

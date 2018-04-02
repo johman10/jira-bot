@@ -3,7 +3,7 @@ const envVariables = require('./env-variables');
 const i18next = require('i18next');
 const Backend = require('i18next-node-fs-backend');
 
-i18next.use(Backend)
+i18next.use(Backend);
 i18next.init({
   lng: envVariables('LANGUAGE'),
   debug: envVariables('DEVELOPMENT'),
@@ -13,8 +13,8 @@ i18next.init({
   backend: {
     loadPath: path.resolve(__dirname, '../locales/{{lng}}.json'),
     addPath: path.resolve(__dirname, '../locales/{{lng}}.missing.json'),
-    jsonIndent: 2
-  }
+    jsonIndent: 2,
+  },
 });
 
 module.exports = i18next;
