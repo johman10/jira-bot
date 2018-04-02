@@ -1,19 +1,21 @@
 const envVariables = require('./env-variables');
 const Botkit = require('botkit');
 const botkitStoragePostgres = require('botkit-storage-postgres');
-const url = require('url');
-const databaseUrl = url.parse(envVariables('DATABASE_URL'));
+const { URL } = require('url');
+const databaseUrl = new URL(envVariables('DATABASE_URL'));
+
+console.log(databaseUrl);
 
 var controller = Botkit.slackbot({
   debug: envVariables('DEVELOPMENT'),
   log: envVariables('DEVELOPMENT'),
   // TODO: consider moving away from postgres since botkit-storage-postgres is unmaintained
   storage: botkitStoragePostgres({
-    host: databaseUrl.host.split(':')[0],
-    port: databaseUrl.host.split(':')[1],
-    user: databaseUrl.auth.split(':')[0],
-    password: databaseUrl.auth.split(':')[1],
-    database: databaseUrl.path.replace('/', '')
+    host: databaseUrl.hostname,
+    port: databaseUrl.port,
+    user: databaseUrl.username,
+    password: databaseUrl.password,
+    database: databaseUrl.pathname.replace('/', '')
   })
 });
 
