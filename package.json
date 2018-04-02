@@ -23,6 +23,7 @@
     "botkit": "^0.6.12",
     "botkit-storage-postgres": "git+https://github.com/lixhq/botkit-storage-postgres.git",
     "dotenv": "^5.0.1",
+    "envalid": "^4.1.4",
     "i18next": "^10.6.0",
     "i18next-node-fs-backend": "^1.0.0",
     "jira-connector": "^2.7.0"

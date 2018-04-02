@@ -1,5 +1,3 @@
-// TODO: Env variable validation.
-// Throw an obvious error for missing vars when booting would be nice for debugging purposes
 const config = require('./config');
 
 const botController = config['bot-controller'];
