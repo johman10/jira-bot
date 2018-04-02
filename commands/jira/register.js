@@ -1,13 +1,16 @@
+const { URL } = require('url');
 const config = require('../../config');
+const envVariables = config['env-variables'];
 const i18n = config.locales;
 const jira = config.jira;
 
 function registerUser (bot, message) {
   bot.startConversation(message,function(err, convo) {
-    convo.ask(i18n.t('jira.register.question'), [
+    const jiraProfileUrl = new URL('secure/ViewProfile.jspa', envVariables('JIRA_URL'));
+    convo.ask(i18n.t('jira.register.question', { jiraProfileUrl: jiraProfileUrl.toString() }), [
       {
         pattern: '"(.*)"',
-        callback: function(response,convo) {
+        callback: function(response, convo) {
           bot.botkit.storage.users.save({ id: response.user, jira_username: response.match[1] }, function(err) {
             if (err) {
               convo.say(i18n.t('storage.error.save'));
@@ -22,7 +25,7 @@ function registerUser (bot, message) {
       },
       {
         pattern: 'cancel',
-        callback: function(response,convo) {
+        callback: function(response, convo) {
           convo.say(i18n.t('jira.register.stop'));
           convo.next();
         }

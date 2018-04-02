@@ -1,3 +1,4 @@
+const { URL } = require('url');
 const config = require('../../config');
 const envVariables = config['env-variables'];
 const jira = config.jira;
@@ -32,11 +33,14 @@ function createMessage(issueNumber) {
         color = envVariables('SLACK_COLOR_TWO')
       }
 
+      const issueUrl = new URL('browse', envVariables('JIRA_URL'));
+      issueUrl.pathname = `${issueUrl.pathname}/${issueNumber}`;
+
       var attachments = [];
       resolve({
         color,
         title: issueNumber + ' - ' + issue.fields.summary,
-        title_link: envVariables('JIRA_ISSUE_URL') + issueNumber,
+        title_link: issueUrl.toString(),
         text: issue.fields.description,
         fields: [
           {
