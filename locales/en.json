@@ -9,7 +9,11 @@
     "register": {
       "question": "To register your JIRA account you will have tell me your name in JIRA. Please make sure your name is between double quotes (for example: \"Slackbot\") so I can find your name in the message. If you don't know your username have a look here: https://mittmedia.atlassian.net/secure/ViewProfile.jspa.",
       "stop": "The registration process has been stopped.",
-      "success": "Your registration was successfull with username {{username}}. If you want to change your registration just say 'registration' again. From now on you will be able to assign yourself to JIRA issues by saying something like: '@reachbot assign REF-XXX'"
+      "success": "Your registration was successfull with username {{username}}. If you want to change your registration just say 'registration' again. From now on you will be able to assign yourself to JIRA issues by saying something like: '@reachbot assign REF-XXX'",
+      "error": {
+        "no_email": "It seems like you send me an email address, please try again and use the username from your profile instead.",
+        "no_username": "I can't seem to find your username, please make sure you send me your username between double quotes (\"\")."
+      }
     },
     "link": {
       "success": "The link between {{issue1}} & {{issue2}} was successfully created. Please double check JIRA to make sure that it was done correctly.",

@@ -28,9 +28,17 @@ function registerUser (bot, message) {
         }
       },
       {
-        default: true,
-        callback: function(response,convo) {
+        pattern: '(.*?)@(.*?)\.(.*?)',
+        callback: function(response, convo) {
           convo.say(i18n.t('jira.register.error.no_email'));
+          convo.repeat();
+          convo.next();
+        }
+      },
+      {
+        default: true,
+        callback: function(response, convo) {
+          convo.say(i18n.t('jira.register.error.no_result'));
           convo.repeat();
           convo.next();
         }
