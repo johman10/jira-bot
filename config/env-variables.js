@@ -51,16 +51,14 @@ let config = envalid.cleanEnv(process.env, {
   PORT: num({
     default: 8080,
     desc: 'The port that the node server will be running on',
-    example: 8080
-  })
+    example: 8080,
+  }),
 });
 
 config = Object.assign({}, config, {
   DEVELOPMENT: process.env.NODE_ENV === 'development',
   PRODUCTION: process.env.NODE_ENV === 'production',
 });
-
-console.log(config);
 
 module.exports = (key) => {
   if (!key) return config;
