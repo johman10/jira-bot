@@ -7,6 +7,7 @@ const databaseUrl = url.parse(envVariables('DATABASE_URL'));
 var controller = Botkit.slackbot({
   debug: envVariables('DEVELOPMENT'),
   log: envVariables('DEVELOPMENT'),
+  // TODO: consider moving away from postgres since botkit-storage-postgres is unmaintained
   storage: botkitStoragePostgres({
     host: databaseUrl.host.split(':')[0],
     port: databaseUrl.host.split(':')[1],
