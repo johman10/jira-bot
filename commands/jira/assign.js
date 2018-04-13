@@ -14,16 +14,15 @@ function assignUser(bot, message) {
       bot.replyInThread(message, i18n.t('storage.error.user_none'));
       return;
     }
-    console.log(message.match);
-    const issueKey = message.match[1];
-    jira.issue.assignIssue({ issueKey, assignee: user.jira_username }, (assignError) => {
-      if (assignError) {
-        bot.replyInThread(message, i18n.t('jira.assign.error.api'));
-        return;
-      }
 
-      bot.replyInThread(message, i18n.t('jira.assign.success', { issueKey }));
-    });
+    const issueKey = message.match[1];
+    jira.issue.assignIssue({ issueKey, assignee: user.jira_username })
+      .then(() => {
+        bot.replyInThread(message, i18n.t('jira.assign.success', { issueKey }));
+      })
+      .catch(() => {
+        bot.replyInThread(message, i18n.t('jira.assign.error.api'));
+      });
   });
 }
 

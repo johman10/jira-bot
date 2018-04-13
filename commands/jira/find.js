@@ -7,13 +7,13 @@ const { jira } = config;
 const i18n = config.locales;
 
 function findIssue(bot, message) {
-  const messagePromises = [];
+  const replyPromises = [];
   message.match.forEach((issueKey) => {
-    messagePromises.push(createMessage(issueKey));
+    replyPromises.push(createReply(issueKey));
   });
 
-  Promise.all(messagePromises).then((attachments) => {
-    bot.replyInThread(message, { attachments });
+  Promise.all(replyPromises).then((replyMessage) => {
+    bot.replyInThread(message, { attachments: replyMessage });
   }).catch(() => {
     bot.replyInThread(message, i18n.t('jira.find.error.not_found'));
   });
@@ -24,39 +24,35 @@ function getColor(issueKey) {
   return envVariables('SLACK_COLORS')[colorIndex];
 }
 
-function createMessage(issueKey) {
-  return new Promise((resolve, reject) => {
-    jira.issue.getIssue({ issueKey }, (error, issue) => {
-      if (error || !issue) {
-        console.error('ERROR: ', error); // eslint-disable-line no-console
-        reject();
-        return;
-      }
-
+function createReply(issueKey) {
+  return jira.issue.getIssue({ issueKey })
+    .then((issue) => {
       const color = getColor(issueKey);
       const issueUrl = new URL('browse', envVariables('JIRA_URL'));
       issueUrl.pathname = `${issueUrl.pathname}/${issueKey}`;
 
-      resolve({
+      return {
         color,
         title: `${issueKey} - ${issue.fields.summary}`,
         title_link: issueUrl.toString(),
         text: issue.fields.description,
         fields: [
           {
-            title: 'Status',
+            title: 'Status', // TODO: Remove hardcoded string
             value: issue.fields.status.name,
             short: true,
           },
           {
-            title: 'Assignee',
-            value: issue.fields.assignee ? issue.fields.assignee.name : 'No one',
+            title: 'Assignee', // TODO: Remove hardcoded string
+            value: issue.fields.assignee ? issue.fields.assignee.name : 'No one', // TODO: Remove hardcoded string
             short: true,
           },
         ],
-      });
+      };
+    })
+    .catch((error) => {
+      console.error('ERROR: ', error); // eslint-disable-line no-console
     });
-  });
 }
 
 module.exports = findIssue;
