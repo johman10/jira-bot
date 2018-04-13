@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "deploy": "git push heroku-reacher develop:master && git push heroku-blackcap develop:master",
+    "deploy": "git push heroku-reacher develop:master && git push heroku-mittmedia develop:master",
     "lint": "./node_modules/.bin/eslint .",
     "lint:fix": "./node_modules/.bin/eslint . --fix"
   },
