@@ -7,12 +7,12 @@ const { getIssueRegexString, getIssueRegex } = require('./modules/jira-regex');
 const listenFor = [
   {
     regex: '^link',
-    on: ['mention', 'direct_message'],
+    on: ['mention', 'direct_mention', 'direct_message'],
     handler: commands.jira.link,
   },
   {
     regex: new RegExp(`^assign me to (${getIssueRegexString()})`, 'i'),
-    on: ['mention', 'direct_message'],
+    on: ['mention', 'direct_mention', 'direct_message'],
     handler: commands.jira.assign,
   },
   {
@@ -32,12 +32,12 @@ const listenFor = [
   },
   {
     regex: new RegExp('love|heart', 'gi'),
-    on: ['direct_message', 'mention'],
+    on: ['direct_message', 'mention', 'direct_mention'],
     handler: commands.love,
   },
   {
     regex: new RegExp('help', 'gi'),
-    on: ['direct_message', 'mention'],
+    on: ['direct_message', 'mention', 'direct_mention'],
     handler: commands.help,
   },
 ];
