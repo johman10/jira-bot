@@ -31,7 +31,7 @@ const listenFor = [
     handler: commands.jira.registration,
   },
   {
-    regex: [new RegExp('love|heart', 'gi')],
+    regex: new RegExp('love|heart', 'gi'),
     on: ['direct_message', 'mention'],
     handler: commands.love,
   },

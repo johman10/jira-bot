@@ -19,7 +19,7 @@ const linkMap = [
   },
   {
     name: 'Relates',
-    options: ['relates to', 'is related to'],
+    options: ['is related to', 'relates to'],
   },
 ];
 
