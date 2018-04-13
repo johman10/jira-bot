@@ -1,16 +1,27 @@
-const envalid = require('envalid');
-const dotenv = require('dotenv');
-
 const {
   email,
-  num,
   str,
   url,
-} = envalid;
+  makeValidator,
+  cleanEnv,
+} = require('envalid');
+const dotenv = require('dotenv');
+
+const array = makeValidator((input) => {
+  let returnValue = input;
+  if (typeof returnValue === 'number') throw new TypeError(`Invalid array value: "${returnValue}"`);
+  if (returnValue === '') return returnValue;
+  if (returnValue[0] === '[') returnValue = returnValue.slice(1);
+  if (returnValue[returnValue.length - 1] === ']') {
+    returnValue = returnValue.slice(0, returnValue.length - 1);
+  }
+  if (returnValue === '') return returnValue;
+  return returnValue.split(/,\s?/);
+});
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') dotenv.load();
 
-let config = envalid.cleanEnv(process.env, {
+let config = cleanEnv(process.env, {
   NODE_ENV: str({
     default: 'development',
     choices: ['development', 'production'],
@@ -25,14 +36,14 @@ let config = envalid.cleanEnv(process.env, {
     example: 'xoxb-123456789012-AbCdEfGhIjKlMnOpQrStUvWx',
     docs: 'https://api.slack.com/bot-users#setup',
   }),
-  SLACK_COLOR_ONE: str({
+  SLACK_COLORS: array({
     default: '#000000',
-    desc: 'The default color (in HEX) that will be show next to the text that the bot generates',
-    example: '#09A7DB',
+    desc: 'A coma seperated list of of HEX colors that will be use together with the JIRA_ISSUE_REGEX variable to match. The index of the element in the array should match the index of that regex groups.',
+    example: '#09A7DB, #000000',
   }),
-  JIRA_ISSUE_REGEX: str({
-    desc: 'A matching regex to all the issues the bot should reply to',
-    example: 'ABC?\-([0-9]{1,4})', // eslint-disable-line no-useless-escape
+  JIRA_BOARD_KEYS: array({
+    desc: 'A coma seperated list of of board keys. This will be used to find the issue key in the message that is send and will be used with SLACK_COLORS to find the right colour for the message (based on index). Please note that the more specific value has to be first so do `ABC, AB`.',
+    example: 'ABC, DEF',
   }),
   JIRA_USERNAME: email({
     desc: 'This bot needs a JIRA user, this value should be an email address and the JIRA user should have access to the JIRA board that the regex matches to.',
@@ -47,11 +58,6 @@ let config = envalid.cleanEnv(process.env, {
   DATABASE_URL: url({
     desc: 'The URL to a Postgres database that can be used to store logged in users, no tables have to be created but that database has to accessible',
     example: 'postgres://[username]:[password]@[host]:[port]/[database]',
-  }),
-  PORT: num({
-    default: 8080,
-    desc: 'The port that the node server will be running on',
-    example: 8080,
   }),
 });
 

@@ -1,8 +1,8 @@
 const config = require('./config');
 
 const botController = config['bot-controller'];
-const envVariables = config['env-variables'];
 const commands = require('./commands');
+const { getIssueRegexString, getIssueRegex } = require('./modules/jira-regex');
 
 const listenFor = [
   {
@@ -11,12 +11,12 @@ const listenFor = [
     handler: commands.jira.link,
   },
   {
-    regex: [new RegExp(`assign me to ${envVariables('JIRA_ISSUE_REGEX')}`, 'i')],
+    regex: new RegExp(`^assign me to (${getIssueRegexString()})`, 'i'),
     on: ['mention', 'direct_message'],
     handler: commands.jira.assign,
   },
   {
-    regex: [new RegExp(envVariables('JIRA_ISSUE_REGEX'), 'gi')],
+    regex: getIssueRegex(),
     on: ['ambient', 'direct_message'],
     handler: commands.jira.find,
   },

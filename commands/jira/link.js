@@ -1,6 +1,6 @@
 const config = require('../../config');
+const { getIssueRegex } = require('../../modules/jira-regex');
 
-const envVariables = config['env-variables'];
 const i18n = config.locales;
 const { jira } = config;
 
@@ -32,7 +32,7 @@ function linkIssues(bot, message) {
 }
 
 function findIssues(bot, message) {
-  const issueNumbers = message.text.match(new RegExp(envVariables('JIRA_ISSUE_REGEX'), 'gi'));
+  const issueNumbers = message.text.match(getIssueRegex('gi'));
   if (issueNumbers && issueNumbers.length === 2) {
     return issueNumbers;
   }
