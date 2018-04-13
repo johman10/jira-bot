@@ -38,13 +38,13 @@ function createReply(issueKey) {
         text: issue.fields.description,
         fields: [
           {
-            title: 'Status', // TODO: Remove hardcoded string
+            title: i18n.t('jira.find.status'),
             value: issue.fields.status.name,
             short: true,
           },
           {
-            title: 'Assignee', // TODO: Remove hardcoded string
-            value: issue.fields.assignee ? issue.fields.assignee.name : 'No one', // TODO: Remove hardcoded string
+            title: i18n.t('jira.find.assignee'),
+            value: issue.fields.assignee ? issue.fields.assignee.name : i18n.t('jira.find.no_assignee'),
             short: true,
           },
         ],

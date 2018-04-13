@@ -23,6 +23,9 @@
       }
     },
     "find": {
+      "assignee": "Assignee",
+      "no_assignee": "No one",
+      "status": "Status",
       "error": {
         "not_found": "I thought I heard you talking about an issues just a second ago, but I was unable to find it on JIRA. I'm sorry. :disappointed:"
       }
