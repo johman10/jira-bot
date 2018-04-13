@@ -7,12 +7,10 @@
       "success": "I successfully assigned you to issue {{issueKey}}. Please doublecheck JIRA just to be sure. Robots make mistakes you know."
     },
     "register": {
-      "question": "Please tell me your JIRA username between double quotes (for example: \"Slackbot\") to register yourself. If you don't know your username have a look here: {{- jiraProfileUrl}}.",
-      "stop": "The registration process has been stopped.",
-      "success": "Your registration was successfull with username: {{username}}. If you want to change your registration just say \"registration\" again.",
+      "success": "Your registration was successfull with username: {{username}}. If you want to change your registration say `register \"[username]\"` again.",
       "error": {
         "no_email": "It seems like you send me an email address, please try again and use the username from your profile instead.",
-        "no_result": "I can't seem to find your username, please make sure you send me your username between double quotes (\"\"). If you want to cancel the registration process tell me to cancel."
+        "no_result": "I can't seem to find your username, please make sure you send me your username between double quotes (`register \"[username]\"`)."
       }
     },
     "link": {
@@ -49,8 +47,8 @@
       "text": "Link the issueKey1 to IssueKey2 with a type that you specify.\n_Triggers in:_ direct message and mention"
     },
     "register": {
-      "title": "Register",
-      "text": "Start the registration process to be able to use the user specific commands.\n_Triggers in:_ direct message"
+      "title": "Register \"[JIRA Username]\"",
+      "text": "Register yourself with your JIRA username to be able to use the user specific commands.\n_Triggers in:_ direct message"
     },
     "whoami": {
       "title": "Whoami",
