@@ -35,6 +35,11 @@ const listenFor = [
     on: ['direct_message', 'mention'],
     handler: commands.love,
   },
+  {
+    regex: new RegExp('help', 'gi'),
+    on: ['direct_message', 'mention'],
+    handler: commands.help,
+  },
 ];
 
 listenFor.forEach((listenItem) => {

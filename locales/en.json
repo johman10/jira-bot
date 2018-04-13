@@ -35,6 +35,25 @@
       }
     }
   },
+  "help": {
+    "text": "I have a lot of features. They trigger based on different words. This can be confusing sometimes, even though they are quite straight forward. Here is a list of my skills:",
+    "assign": {
+      "title": "Assign me to [issueKey]",
+      "text": "This will assign you to the issueKey you mention. This requires a the register process to be completed.\n_Triggers in:_ direct message and mention"
+    },
+    "link": {
+      "title": "Link [issueKey1] is [\"blocked by\", \"duplicated by\", \"caused by\", \"related to\"] [issueKey2]",
+      "text": "Link the issueKey1 to IssueKey2 with a type that you specify.\n_Triggers in:_ direct message and mention"
+    },
+    "register": {
+      "title": "Register",
+      "text": "Start the registration process to be able to use the user specific commands.\n_Triggers in:_ direct message"
+    },
+    "whoami": {
+      "title": "Whoami",
+      "text": "Show the user if you finished the register process.\n_Triggers in:_ direct message"
+    }
+  },
   "storage": {
     "error": {
       "user_get": "There was a problem when getting you from the database. Please say \"register\" in a private conversation with me to start the registration process.",
