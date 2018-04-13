@@ -27,7 +27,7 @@
         "not_found": "I thought I heard you talking about an issues just a second ago, but I was unable to find it on JIRA. I'm sorry. :disappointed:"
       }
     },
-    "registration": {
+    "whoami": {
       "title": "Your user data",
       "text": "This is the data that I have from <@{{userId}}>",
       "field": {

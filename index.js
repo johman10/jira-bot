@@ -28,7 +28,7 @@ const listenFor = [
   {
     regex: '^whoami',
     on: ['direct_message'],
-    handler: commands.jira.registration,
+    handler: commands.jira.whoami,
   },
   {
     regex: new RegExp('love|heart', 'gi'),

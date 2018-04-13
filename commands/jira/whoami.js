@@ -20,14 +20,14 @@ function findRegistration(bot, message) {
 
 function buildRegistrationMessage(user) {
   return {
-    title: i18n.t('jira.registration.title'),
-    text: i18n.t('jira.registration.text', { userId: user.id }),
+    title: i18n.t('jira.whoami.title'),
+    text: i18n.t('jira.whoami.text', { userId: user.id }),
     fields: [
       {
-        title: i18n.t('jira.registration.field.jira_username'),
+        title: i18n.t('jira.whoami.field.jira_username'),
         value: user.jira_username,
         short: false,
-        footer: i18n.t('jira.registration.footer'),
+        footer: i18n.t('jira.whoami.footer'),
       },
     ],
   };
