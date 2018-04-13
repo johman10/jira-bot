@@ -1,7 +1,7 @@
 {
-  "name": "reachbot",
+  "name": "jirabot",
   "version": "1.0.0",
-  "description": "Slack bot for Reacher",
+  "description": "Slack bot for Jira",
   "main": "src/index.js",
   "engines": {
     "node": "9.10.1"
@@ -15,7 +15,7 @@
   "keywords": [
     "slack",
     "bot",
-    "reacher"
+    "jira"
   ],
   "author": "Johan van Eck",
   "license": "ISC",
